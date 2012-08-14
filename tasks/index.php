@@ -161,11 +161,11 @@ $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY 
   <thead>
     <tr>
       <th>Nr
-      <th>Typ pracy
       <th>Data rozpoczęcia
       <th>Data oddania
       <th>Lekarz
       <th>Pacjent
+      <th>Typ pracy
       <th class="actions">Akcje
     </tr>
   </thead>
@@ -173,7 +173,6 @@ $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY 
     <? foreach ($pagedTasks AS $task): ?>
     <tr>
       <td><?= e($task->nr) ?>
-      <td><?= e($task->worktypeName) ?>
       <td><?= date('Y-m-d', $task->startDate) ?>
       <td><?= empty($task->closeDate) ? '-' : date('Y-m-d', $task->closeDate) ?>
       <td>
@@ -188,6 +187,7 @@ $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY 
         <? else: ?>
         <a href="<?= url_for("contacts/view.php?id={$task->patient}") ?>"><?= e($task->patientName) ?></a>
         <? endif ?>
+      <td><?= e($task->worktypeName) ?>
       <td class="actions">
         <a class="btn" href="<?= url_for("tasks/view.php?id={$task->id}") ?>"><i class="icon-list-alt"></i></a>
         <a class="btn" href="<?= url_for("tasks/edit.php?id={$task->id}") ?>"><i class="icon-pencil"></i></a>
