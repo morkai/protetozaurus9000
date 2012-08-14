@@ -53,12 +53,20 @@ if (!empty($filter['w']))
   $conditions[] = 't.worktype IN(' . implode(',', $filter['w']) . ')';
 }
 
-if (strlen($filter['d']) >= 3)
+if (is_numeric($filter['d']))
+{
+  $conditions[] = "t.doctor={$filter['d']}";
+}
+else if (strlen($filter['d']) >= 3)
 {
   $conditions[] = "d.name LIKE '%" . addslashes($filter['d']) . "%'";
 }
 
-if (strlen($filter['p']) >= 3)
+if (is_numeric($filter['p']))
+{
+  $conditions[] = "t.patient={$filter['p']}";
+}
+else if (strlen($filter['p']) >= 3)
 {
   $conditions[] = "p.name LIKE '%" . addslashes($filter['p']) . "%'";
 }
