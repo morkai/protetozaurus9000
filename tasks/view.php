@@ -46,7 +46,7 @@ $task->notes = empty($task->notes) ? '-' : nl2br($task->notes);
     <?= $task->nr ?>
   </h1>
 </div>
-  
+
 <dl class="well properties">
   <dt>Nr:
   <dd><?= $task->nr ?>

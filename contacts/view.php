@@ -93,7 +93,7 @@ $previousMonth = $previousYear . '-' . $previousMonth;
   <div class="span3 well nav-well">
     <ul class="nav nav-list">
       <li class="nav-header">Listy zadań
-      <li><a href="<?= url_for("/tasks/?d={$contact->id}") ?>">Zadania jako doctor</a>
+      <li><a href="<?= url_for("/tasks/?d={$contact->id}") ?>">Zadania jako lekarz</a>
       <li><a href="<?= url_for("/tasks/?p={$contact->id}") ?>">Zadania jako pacjent</a>
       <li class="nav-header">Faktury
       <li><a href="<?= url_for("/reports/invoice.php?doctor={$contact->id}&month={$currentMonth}") ?>">Z aktualnego miesiąca</a>
