@@ -29,6 +29,9 @@ body {
   width: 1%;
   white-space: nowrap;
 }
+.properties {
+  margin: 0;
+}
 .properties dt {
   margin-top: .5em;
 }
@@ -94,6 +97,9 @@ p:last-child {
 }
 br + label {
   margin-top: .5em;
+}
+.nav-well {
+  padding: 8px 0;
 }
 @media (max-width: 979px) {
   body {

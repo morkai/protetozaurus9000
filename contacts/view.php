@@ -10,7 +10,37 @@ not_found_if(empty($contact));
 
 escape($contact);
 
+$currentYear = date('Y');
+$currentMonth = date('m');
+
+if ($currentMonth === '01')
+{
+  $previousYear  = $currentYear - 1;
+  $previousMonth = 12;
+}
+else
+{
+  $previousYear  = $currentYear;
+  $previousMonth = $currentMonth - 1;
+}
+
+if ($previousMonth < 10)
+{
+  $previousMonth = '0' . $previousMonth;
+}
+
+$currentMonth = $currentYear . '-' . $currentMonth;
+$previousMonth = $previousYear . '-' . $previousMonth;
+
 ?>
+
+<? begin_slot('head') ?>
+<style>
+#chooseInvoiceMonth .control-group {
+  margin-bottom: 0;
+}
+</style>
+<? append_slot() ?>
 
 <? decorate('Kontakt') ?>
 
@@ -24,36 +54,69 @@ escape($contact);
     <?= $contact->name ?>
   </h1>
 </div>
-  
-<dl class="well properties">
-  <dt>Imię i nazwisko:
-  <dd><?= $contact->name ?>
-  <dt>Adres:
-  <dd><?= nl2br($contact->address) ?>
-  <dt>Firma:
-  <dd><?= dash_if_empty($contact->company) ?>
-  <dt>Stanowisko:
-  <dd><?= dash_if_empty($contact->position) ?>
-  <dt>Adres e-mail:
-  <dd>
-    <? if (empty($contact->email)): ?>
-    -
-    <? else: ?>
-    <a href="mailto:<?= $contact->email ?>"><?= $contact->email ?></a>
-    <? endif ?>
-  <dt>Strona WWW:
-  <dd>
-    <? if (empty($contact->website)): ?>
-    -
-    <? else: ?>
-    <a href="<?= $contact->website ?>"><?= $contact->website ?></a>
-    <? endif ?>
-  <dt>Telefon domowy:
-  <dd><?= dash_if_empty($contact->telHome) ?>
-  <dt>Telefon służbowy:
-  <dd><?= dash_if_empty($contact->telWork) ?>
-  <dt>Telefon komórkowy:
-  <dd><?= dash_if_empty($contact->telMobile) ?>
-  <dt>Uwagi:
-  <dd><?= empty($contact->comments) ? '-' : nl2br($contact->comments) ?>
-</dl>
+
+<div class="row-fluid">
+  <div class="span9 well">
+    <dl class="properties span9">
+      <dt>Imię i nazwisko:
+      <dd><?= $contact->name ?>
+      <dt>Adres:
+      <dd><?= nl2br($contact->address) ?>
+      <dt>Firma:
+      <dd><?= dash_if_empty($contact->company) ?>
+      <dt>Stanowisko:
+      <dd><?= dash_if_empty($contact->position) ?>
+      <dt>Adres e-mail:
+      <dd>
+        <? if (empty($contact->email)): ?>
+        -
+        <? else: ?>
+        <a href="mailto:<?= $contact->email ?>"><?= $contact->email ?></a>
+        <? endif ?>
+      <dt>Strona WWW:
+      <dd>
+        <? if (empty($contact->website)): ?>
+        -
+        <? else: ?>
+        <a href="<?= $contact->website ?>"><?= $contact->website ?></a>
+        <? endif ?>
+      <dt>Telefon domowy:
+      <dd><?= dash_if_empty($contact->telHome) ?>
+      <dt>Telefon służbowy:
+      <dd><?= dash_if_empty($contact->telWork) ?>
+      <dt>Telefon komórkowy:
+      <dd><?= dash_if_empty($contact->telMobile) ?>
+      <dt>Uwagi:
+      <dd><?= empty($contact->comments) ? '-' : nl2br($contact->comments) ?>
+    </dl>
+  </div>
+  <div class="span3 well nav-well">
+    <ul class="nav nav-list">
+      <li class="nav-header">Listy zadań
+      <li><a href="<?= url_for("/tasks/?d={$contact->id}") ?>">Zadania jako doctor</a>
+      <li><a href="<?= url_for("/tasks/?p={$contact->id}") ?>">Zadania jako pacjent</a>
+      <li class="nav-header">Faktury
+      <li><a href="<?= url_for("/reports/invoice.php?doctor={$contact->id}&month={$currentMonth}") ?>">Z aktualnego miesiąca</a>
+      <li><a href="<?= url_for("/reports/invoice.php?doctor={$contact->id}&month={$previousMonth}") ?>">Z poprzedniego miesiąca</a>
+      <li><a data-toggle="modal" href="#chooseInvoiceMonth">Z wybranego miesiąca</a>
+    </ul>
+  </div>
+</div>
+
+<form action="<?= url_for("/reports/invoice.php") ?>" id="chooseInvoiceMonth" class="modal hide form-inline">
+  <input type="hidden" name="doctor" value="<?= $contact->id ?>">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Faktura z wybranego miesiąca</h3>
+  </div>
+  <div class="modal-body">
+    <div class="control-group">
+      <label for=chooseInvoiceMonth-month class="control-label">Miesiąc:</label>
+      <input id=chooseInvoiceMonth-month name=month type=date value="" autofocus>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Anuluj</a>
+    <input type="submit" class="btn btn-primary" value="Generuj fakturę">
+  </div>
+</form>
