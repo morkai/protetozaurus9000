@@ -35,6 +35,7 @@ $tasks = fetch_all($q, array(
 
 ?>
 <!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8">
   <title>Faktura</title>
