@@ -74,10 +74,6 @@ $task->notes = empty($task->notes) ? '-' : nl2br($task->notes);
   <dd><?= $task->quantityName ?>
   <dt>Kolor:
   <dd><?= $task->colorName ?>
-  <dt>Metal:
-  <dd><?= $task->metal ?>
-  <dt>Cyrkon:
-  <dd><?= $task->zircon ?>
   <dt>Uwagi:
   <dd><?= $task->notes ?>
 </dl>

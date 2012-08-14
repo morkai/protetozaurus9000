@@ -44,8 +44,6 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `quantity` int(10) unsigned DEFAULT NULL,
   `color` int(10) unsigned DEFAULT NULL,
   `worktype` int(10) unsigned DEFAULT NULL,
-  `metal` tinyint(1) NOT NULL DEFAULT '0',
-  `zircon` tinyint(1) NOT NULL DEFAULT '0',
   `notes` text COLLATE utf8_polish_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nr` (`nr`),

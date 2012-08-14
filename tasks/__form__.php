@@ -41,18 +41,6 @@
   </select>
 </div>
 <div class="control-group">
-  <label for=task-metal class="checkbox">
-    <input id=task-metal name=task[metal] type="checkbox" value="1" <?= checked_if($task->metal) ?>>
-    Metal
-  </label>
-</div>
-<div class="control-group">
-  <label for=task-zircon class="checkbox">
-    <input id=task-zircon name=task[zircon] type="checkbox" value="1" <?= checked_if($task->zircon) ?>>
-    Cyrkon
-  </label>
-</div>
-<div class="control-group">
   <label for=task-notes class="control-label">Uwagi:</label>
   <textarea id=task-notes name=task[notes] class="span12" rows="5" cols="10"><?= $task->notes ?></textarea>
 </div>
