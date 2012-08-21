@@ -9,13 +9,11 @@ SELECT
   t.*,
   d.name AS doctorName,
   p.name AS patientName,
-  q.name AS quantityName,
   c.name AS colorName,
   w.name AS worktypeName
 FROM tasks t
 LEFT JOIN contacts d ON d.id=t.doctor
 LEFT JOIN contacts p ON p.id=t.patient
-INNER JOIN quantities q ON q.id=t.quantity
 INNER JOIN colors c ON c.id=t.color
 INNER JOIN worktypes w ON w.id=t.worktype
 WHERE t.id=:id
@@ -28,9 +26,8 @@ not_found_if(empty($task));
 
 $task->startDate = date('Y-m-d', $task->startDate);
 $task->closeDate = empty($task->closeDate) ? '-' : date('Y-m-d', $task->closeDate);
-$task->metal = $task->metal ? 'Tak' : 'Nie';
-$task->zircon = $task->zircon ? 'Tak' : 'Nie';
-$task->notes = empty($task->notes) ? '-' : nl2br($task->notes);
+$task->notes = empty($task->notes) ? '-' : nl2br(e($task->notes));
+$task->quantity = round($task->quantity, 2);
 
 ?>
 
@@ -43,13 +40,13 @@ $task->notes = empty($task->notes) ? '-' : nl2br($task->notes);
   </ul>
   <h1>
     <a href="<?= url_for("/tasks") ?>">Zadania</a> \
-    <?= $task->nr ?>
+    <?= e($task->nr) ?>
   </h1>
 </div>
 
 <dl class="well properties">
   <dt>Nr:
-  <dd><?= $task->nr ?>
+  <dd><?= e($task->nr) ?>
   <dt>Data rozpoczęcia:
   <dd><?= $task->startDate ?>
   <dt>Data oddania:
@@ -59,21 +56,21 @@ $task->notes = empty($task->notes) ? '-' : nl2br($task->notes);
     <? if (empty($task->doctor)): ?>
     -
     <? else: ?>
-    <a href="<?= url_for("contacts/view.php?id={$task->doctor}") ?>"><?= $task->doctorName ?></a>
+    <a href="<?= url_for("contacts/view.php?id={$task->doctor}") ?>"><?= e($task->doctorName) ?></a>
     <? endif ?>
   <dt>Pacjent:
   <dd>
     <? if (empty($task->patient)): ?>
     -
     <? else: ?>
-    <a href="<?= url_for("contacts/view.php?id={$task->patient}") ?>"><?= $task->patientName ?></a>
+    <a href="<?= url_for("contacts/view.php?id={$task->patient}") ?>"><?= e($task->patientName) ?></a>
     <? endif ?>
   <dt>Typ pracy:
-  <dd><?= $task->worktypeName ?>
+  <dd><?= e($task->worktypeName) ?>
   <dt>Ilość:
-  <dd><?= $task->quantityName ?>
+  <dd><?= $task->quantity ?> <?= e($task->unit) ?>
   <dt>Kolor:
-  <dd><?= $task->colorName ?>
+  <dd><?= e($task->colorName) ?>
   <dt>Uwagi:
   <dd><?= $task->notes ?>
 </dl>

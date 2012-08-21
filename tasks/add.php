@@ -40,9 +40,8 @@ $task = (object)array(
   'patientName' => '',
   'worktype' => 0,
   'color' => 0,
-  'quantity' => 0,
-  'metal' => false,
-  'zircon' => false,
+  'quantity' => 1,
+  'unit' => 'szt.',
   'notes' => ''
 );
 
@@ -61,6 +60,6 @@ $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY 
   </h1>
 </div>
 
-<form action="<?= url_for("/tasks/add.php") ?>" method=post>
+<form action="<?= url_for("/tasks/add.php") ?>" method=post autocomplete=off>
   <? include __DIR__ . '/__form__.php' ?>
 </form>

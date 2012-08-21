@@ -1,11 +1,11 @@
 <?php
 
-define('APP_PDO_DSN', 'mysql:host=localhost;dbname=pp');
-define('APP_PDO_USER', 'root');
-define('APP_PDO_PASS', '');
+define('APP_PDO_DSN', 'mysql:host=mysql5;dbname=walkner_pp');
+define('APP_PDO_USER', 'walkner');
+define('APP_PDO_PASS', 'XSQ123xsq');
 
-define('APP_DOMAIN', 'localhost');
-define('APP_BASE_URL', '/pp/');
+define('APP_DOMAIN', 'pp.walkner.pl');
+define('APP_BASE_URL', '/');
 
 define('APP_UPLOADS_DIR', '/__files__');
 

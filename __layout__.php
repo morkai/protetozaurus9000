@@ -4,8 +4,7 @@ $menu = array(
   'tasks' => 'Zadania',
   'contacts' => 'Kontakty',
   'worktypes' => 'Typy prac',
-  'colors' => 'Kolory',
-  'quantities' => 'Ilości'
+  'colors' => 'Kolory'
 );
 
 if (!isset($_SERVER['REQUEST_URI']) && isset($_SERVER['HTTP_X_REWRITE_URL']))

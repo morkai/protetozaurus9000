@@ -28,11 +28,15 @@
     <?= render_options($worktypes, $task->worktype) ?>
   </select>
 </div>
-<div class="control-group">
-  <label for=task-quantity class="control-label">Ilość:</label>
-  <select id=task-quantity name=task[quantity] class="span6">
-    <?= render_options($quantities, $task->quantity) ?>
-  </select>
+<div class="row">
+  <div class="control-group span3">
+    <label for=task-quantity class="control-label">Ilość:</label>
+    <input id=task-quantity name=task[quantity] class="span3" type=text value="<?= $task->quantity ?>">
+  </div>
+  <div class="control-group span3">
+    <label for=task-unit class="control-label">Jednostka:</label>
+    <input id=task-unit name=task[unit] class="span3" type=text value="<?= $task->unit ?>">
+  </div>
 </div>
 <div class="control-group">
   <label for=task-color class="control-label">Kolor:</label>
@@ -57,7 +61,6 @@ $(function()
   };
 
   $('#task-worktype').chosen(chosenOptions);
-  $('#task-quantity').chosen(chosenOptions);
   $('#task-color').chosen(chosenOptions);
 
   var typeaheadOptions = {

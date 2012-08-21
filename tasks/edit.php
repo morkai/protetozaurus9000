@@ -50,9 +50,9 @@ escape($task);
 
 $task->startDate = date('Y-m-d', $task->startDate);
 $task->closeDate = empty($task->closeDate) ? '' : date('Y-m-d', $task->closeDate);
+$task->quantity = round($task->quantity, 2);
 
 $worktypes = fetch_array('SELECT id AS `key`, name AS `value` FROM worktypes ORDER BY name ASC');
-$quantities = fetch_array('SELECT id AS `key`, name AS `value` FROM quantities ORDER BY name ASC');
 $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY name ASC');
 
 ?>
@@ -67,6 +67,6 @@ $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY 
   </h1>
 </div>
 
-<form action="<?= url_for("/tasks/edit.php?id={$task->id}") ?>" method=post>
+<form action="<?= url_for("/tasks/edit.php?id={$task->id}") ?>" method=post autocomplete=off>
   <? include __DIR__ . '/__form__.php' ?>
 </form>
