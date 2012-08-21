@@ -1,4 +1,4 @@
 $(function()
 {
-  $('.pagination').on('click', '.disabled a', function() { return false; });
+  $(document.body).on('click', '.disabled, .disabled a', function() { return false; });
 });

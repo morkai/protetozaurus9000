@@ -42,11 +42,11 @@ $task = (object)array(
   'color' => 0,
   'quantity' => 1,
   'unit' => 'szt.',
+  'price' => '0.00',
   'notes' => ''
 );
 
 $worktypes = fetch_array('SELECT id AS `key`, name AS `value` FROM worktypes ORDER BY name ASC');
-$quantities = fetch_array('SELECT id AS `key`, name AS `value` FROM quantities ORDER BY name ASC');
 $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY name ASC');
 
 ?>

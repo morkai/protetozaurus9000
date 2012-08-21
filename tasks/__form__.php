@@ -29,13 +29,17 @@
   </select>
 </div>
 <div class="row">
-  <div class="control-group span3">
+  <div class="control-group span2">
     <label for=task-quantity class="control-label">Ilość:</label>
-    <input id=task-quantity name=task[quantity] class="span3" type=text value="<?= $task->quantity ?>">
+    <input id=task-quantity name=task[quantity] class="span2" type=text value="<?= $task->quantity ?>">
   </div>
-  <div class="control-group span3">
+  <div class="control-group span2">
     <label for=task-unit class="control-label">Jednostka:</label>
-    <input id=task-unit name=task[unit] class="span3" type=text value="<?= $task->unit ?>">
+    <input id=task-unit name=task[unit] class="span2" type=text value="<?= $task->unit ?>">
+  </div>
+  <div class="control-group span2">
+    <label for=task-price class="control-label">Cena:</label>
+    <input id=task-price name=task[price] class="span2" type=text value="<?= $task->price ?>">
   </div>
 </div>
 <div class="control-group">
@@ -77,7 +81,7 @@ $(function()
         name: ''
       };
 
-      this.$element.next().val(contact.id);
+      this.$element.next().val(contact.id).change();
 
       return contact.name;
     },
@@ -105,6 +109,46 @@ $(function()
     $doctor.data('typeahead').$menu.css('min-width', $doctor.outerWidth());
     $patient.data('typeahead').$menu.css('min-width', $patient.outerWidth());
   }).resize();
+
+  var priceRefresher = null;
+  var $price = $('#task-price');
+
+  function changePrice(newPrice)
+  {
+    $price.fadeOut(function()
+    {
+      $price.val(newPrice).fadeIn();
+    });
+  }
+
+  function refreshPrice()
+  {
+    var doctor = parseInt($('#task-doctor').val());
+    var worktype = parseInt($('#task-worktype').val());
+
+    if (priceRefresher !== null)
+    {
+      priceRefresher.abort();
+    }
+
+    priceRefresher = $.ajax({
+      type: 'GET',
+      url: '/worktypes/price.php',
+      data: {doctor: doctor, worktype: worktype},
+      success: function(data)
+      {
+        changePrice(data.price);
+      },
+      error: changePrice.bind(null, '0.00'),
+      complete: function()
+      {
+        priceRefresher = null;
+      }
+    });
+  }
+
+  $('#task-doctor').change(refreshPrice);
+  $('#task-worktype').change(refreshPrice);
 
 });
 </script>

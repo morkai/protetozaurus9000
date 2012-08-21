@@ -99,6 +99,8 @@ $previousMonth = $previousYear . '-' . $previousMonth;
       <li><a href="<?= url_for("/reports/invoice.php?doctor={$contact->id}&month={$currentMonth}") ?>">Z aktualnego miesiąca</a>
       <li><a href="<?= url_for("/reports/invoice.php?doctor={$contact->id}&month={$previousMonth}") ?>">Z poprzedniego miesiąca</a>
       <li><a data-toggle="modal" href="#chooseInvoiceMonth">Z wybranego miesiąca</a>
+      <li class="nav-header">Inne
+      <li><a href="<?= url_for("/worktypes/?doctor={$contact->id}") ?>">Cennik prac</a>
     </ul>
   </div>
 </div>

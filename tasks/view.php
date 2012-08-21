@@ -69,6 +69,8 @@ $task->quantity = round($task->quantity, 2);
   <dd><?= e($task->worktypeName) ?>
   <dt>Ilość:
   <dd><?= $task->quantity ?> <?= e($task->unit) ?>
+  <dt>Cena:
+  <dd><?= $task->price ?> zł
   <dt>Kolor:
   <dd><?= e($task->colorName) ?>
   <dt>Uwagi:

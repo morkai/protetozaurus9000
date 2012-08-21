@@ -15,7 +15,8 @@ if (!empty($_POST['worktype']))
 }
 
 $worktype = (object)array(
-  'name' => ''
+  'name' => '',
+  'price' => '0.00'
 );
 
 ?>
