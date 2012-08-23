@@ -25,7 +25,7 @@ $task = fetch_one($q, array(':id' => $_GET['id']));
 not_found_if(empty($task));
 
 $task->startDate = date('Y-m-d', $task->startDate);
-$task->closeDate = empty($task->closeDate) ? '-' : date('Y-m-d', $task->closeDate);
+$task->closeDate = tasks_format_return_time($task->closeDate);
 $task->notes = empty($task->notes) ? '-' : nl2br(e($task->notes));
 $task->quantity = round($task->quantity, 2);
 
@@ -49,7 +49,7 @@ $task->quantity = round($task->quantity, 2);
   <dd><?= e($task->nr) ?>
   <dt>Data rozpoczęcia:
   <dd><?= $task->startDate ?>
-  <dt>Data oddania:
+  <dt>Czas oddania:
   <dd><?= $task->closeDate ?>
   <dt>Lekarz:
   <dd>

@@ -38,3 +38,8 @@ function tasks_render_teeth($teeth, $readonly = false)
 
   include __DIR__ . '/__teeth__.php';
 }
+
+function tasks_format_return_time($returnTime)
+{
+  return empty($returnTime) ? '-' : date('Y-m-d H:i', $returnTime);
+}

@@ -33,7 +33,7 @@ if (!empty($_POST['task']))
 escape($task);
 
 $task->startDate = date('Y-m-d', $task->startDate);
-$task->closeDate = empty($task->closeDate) ? '' : date('Y-m-d', $task->closeDate);
+$task->closeDate = tasks_format_return_time($task->closeDate);
 $task->quantity = round($task->quantity, 2);
 
 $worktypes = fetch_array('SELECT id AS `key`, name AS `value` FROM worktypes ORDER BY name ASC');

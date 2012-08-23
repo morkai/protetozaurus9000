@@ -8,8 +8,8 @@
     <input id=task-startDate name=task[startDate] class="span3" type=date value="<?= $task->startDate ?>">
   </div>
   <div class="control-group span3">
-    <label for=task-closeDate class="control-label">Data oddania:</label>
-    <input id=task-closeDate name=task[closeDate] class="span3" type=datetime value="<?= $task->closeDate ?>">
+    <label for=task-closeDate class="control-label">Czas oddania:</label>
+    <input id=task-closeDate name=task[closeDate] class="span3" type=datetime value="<?= $task->closeDate ?>" placeholder="YYYY-MM-DD HH:mm">
   </div>
 </div>
 <div class="control-group">

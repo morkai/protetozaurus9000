@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . '/../__common__.php';
+include __DIR__ . '/__common__.php';
 
 $page = empty($_GET['page']) ? 1 : (int)$_GET['page'];
 $perPage = empty($_GET['perPage']) ? 15 : (int)$_GET['perPage'];
@@ -162,7 +162,7 @@ $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY 
     <tr>
       <th>Nr
       <th>Data rozpoczęcia
-      <th>Data oddania
+      <th>Czas oddania
       <th>Lekarz
       <th>Pacjent
       <th>Typ pracy
@@ -174,7 +174,7 @@ $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY 
     <tr>
       <td><?= e($task->nr) ?>
       <td><?= date('Y-m-d', $task->startDate) ?>
-      <td><?= empty($task->closeDate) ? '-' : date('Y-m-d', $task->closeDate) ?>
+      <td><?= tasks_format_return_time($task->closeDate) ?>
       <td>
         <? if (empty($task->doctor)): ?>
         -
