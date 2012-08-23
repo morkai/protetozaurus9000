@@ -9,7 +9,7 @@
   </div>
   <div class="control-group span3">
     <label for=task-closeDate class="control-label">Data oddania:</label>
-    <input id=task-closeDate name=task[closeDate] class="span3" type=date value="<?= $task->closeDate ?>">
+    <input id=task-closeDate name=task[closeDate] class="span3" type=datetime value="<?= $task->closeDate ?>">
   </div>
 </div>
 <div class="control-group">
@@ -22,24 +22,31 @@
   <input id=task-patientName class="span6" type=text value="<?= $task->patientName ?>">
   <input id=task-patient name=task[patient] type=hidden value="<?= $task->patient ?>">
 </div>
-<div class="control-group">
-  <label for=task-worktype class="control-label">Typ pracy:</label>
-  <select id=task-worktype name=task[worktype] class="span6">
-    <?= render_options($worktypes, $task->worktype) ?>
-  </select>
-</div>
 <div class="row">
-  <div class="control-group span2">
-    <label for=task-quantity class="control-label">Ilość:</label>
-    <input id=task-quantity name=task[quantity] class="span2" type=text value="<?= $task->quantity ?>">
+  <div class="span6">
+    <div class="control-group">
+      <label for=task-worktype class="control-label">Typ pracy:</label>
+      <select id=task-worktype name=task[worktype] class="span6">
+        <?= render_options($worktypes, $task->worktype) ?>
+      </select>
+    </div>
+    <div class="row">
+      <div class="control-group span2">
+        <label for=task-quantity class="control-label">Ilość:</label>
+        <input id=task-quantity name=task[quantity] class="span2" type=text value="<?= $task->quantity ?>">
+      </div>
+      <div class="control-group span2">
+        <label for=task-unit class="control-label">Jednostka:</label>
+        <input id=task-unit name=task[unit] class="span2" type=text value="<?= $task->unit ?>">
+      </div>
+      <div class="control-group span2">
+        <label for=task-price class="control-label">Cena:</label>
+        <input id=task-price name=task[price] class="span2" type=text value="<?= $task->price ?>">
+      </div>
+    </div>
   </div>
-  <div class="control-group span2">
-    <label for=task-unit class="control-label">Jednostka:</label>
-    <input id=task-unit name=task[unit] class="span2" type=text value="<?= $task->unit ?>">
-  </div>
-  <div class="control-group span2">
-    <label for=task-price class="control-label">Cena:</label>
-    <input id=task-price name=task[price] class="span2" type=text value="<?= $task->price ?>">
+  <div class="span6">
+    <? tasks_render_teeth($task->teeth) ?>
   </div>
 </div>
 <div class="control-group">

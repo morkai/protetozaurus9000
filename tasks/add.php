@@ -1,26 +1,10 @@
 <?php
 
-include __DIR__ . '/../__common__.php';
+include __DIR__ . '/__common__.php';
 
 if (!empty($_POST['task']))
 {
-  $data = $_POST['task'];
-
-  $data['startDate'] = strtotime($data['startDate']);
-  $data['closeDate'] = strtotime($data['closeDate']);
-
-  if (empty($data['startDate']))
-  {
-    $data['startDate'] = time();
-  }
-
-  if (empty($data['closeDate']))
-  {
-    $data['closeDate'] = 0;
-  }
-
-  $data['doctor'] = empty($data['doctor']) ? null : (int)$data['doctor'];
-  $data['patient'] = empty($data['patient']) ? null : (int)$data['patient'];
+  $data = tasks_prepare_data($_POST['task']);
 
   exec_insert('tasks', $data);
 
@@ -43,6 +27,7 @@ $task = (object)array(
   'quantity' => 1,
   'unit' => 'szt.',
   'price' => '0.00',
+  'teeth' => array(),
   'notes' => ''
 );
 

@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . '/../__common__.php';
+include __DIR__ . '/__common__.php';
 
 bad_request_if(empty($_GET['id']));
 
@@ -73,6 +73,8 @@ $task->quantity = round($task->quantity, 2);
   <dd><?= $task->price ?> zł
   <dt>Kolor:
   <dd><?= e($task->colorName) ?>
+  <dt>Zęby:
+  <dd><? tasks_render_teeth($task->teeth, true) ?>
   <dt>Uwagi:
   <dd><?= $task->notes ?>
 </dl>
