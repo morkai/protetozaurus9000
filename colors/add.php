@@ -10,7 +10,7 @@ if (!empty($_POST['color']))
 
   $lastId = get_conn()->lastInsertId();
 
-  set_flash('Nowy typ prac został dodany pomyślnie!');
+  set_flash('Nowy kolor został dodany pomyślnie!');
   go_to('/colors/add.php');
 }
 
