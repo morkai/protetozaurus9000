@@ -25,11 +25,11 @@ $worktype = (object)array(
 
 <div class="page-header">
   <h1>
-    <a href="<?= url_for("/worktypes") ?>">Typy prac</a> \
+    <a href="<?= url_for("worktypes") ?>">Typy prac</a> \
     Dodawanie
   </h1>
 </div>
 
-<form action="<?= url_for("/worktypes/add.php") ?>" method=post>
+<form action="<?= url_for("worktypes/add.php") ?>" method=post>
   <? include __DIR__ . '/__form__.php' ?>
 </form>

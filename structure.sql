@@ -1,22 +1,16 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
-
 DROP TABLE IF EXISTS `colors`;
-CREATE TABLE IF NOT EXISTS `colors` (
+CREATE TABLE `colors` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 DROP TABLE IF EXISTS `contacts`;
-CREATE TABLE IF NOT EXISTS `contacts` (
+CREATE TABLE `contacts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `company` varchar(100) COLLATE utf8_polish_ci NOT NULL,
   `position` varchar(50) COLLATE utf8_polish_ci NOT NULL,
@@ -29,18 +23,42 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   `address` text COLLATE utf8_polish_ci NOT NULL,
   `comments` text COLLATE utf8_polish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+DROP TABLE IF EXISTS `invoices`;
+CREATE TABLE `invoices` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nr` varchar(30) COLLATE utf8_polish_ci NOT NULL,
+  `date` int(10) unsigned NOT NULL,
+  `seller` int(10) unsigned NOT NULL,
+  `buyer` int(10) unsigned NOT NULL,
+  `sellerInfo` text COLLATE utf8_polish_ci NOT NULL,
+  `buyerInfo` text COLLATE utf8_polish_ci NOT NULL,
+  `closed` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nr` (`nr`),
+  KEY `seller` (`seller`),
+  KEY `buyer` (`buyer`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+DROP TABLE IF EXISTS `invoice_tasks`;
+CREATE TABLE `invoice_tasks` (
+  `invoice` int(10) unsigned NOT NULL,
+  `task` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`invoice`,`task`),
+  KEY `task` (`task`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 DROP TABLE IF EXISTS `quantities`;
-CREATE TABLE IF NOT EXISTS `quantities` (
+CREATE TABLE `quantities` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 DROP TABLE IF EXISTS `tasks`;
-CREATE TABLE IF NOT EXISTS `tasks` (
+CREATE TABLE `tasks` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nr` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `startDate` int(10) unsigned NOT NULL,
@@ -54,25 +72,26 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `worktype` int(10) unsigned DEFAULT NULL,
   `teeth` varchar(83) COLLATE utf8_polish_ci NOT NULL DEFAULT '',
   `notes` text COLLATE utf8_polish_ci NOT NULL,
+  `closed` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `nr` (`nr`),
   KEY `patient` (`patient`),
   KEY `color` (`color`),
   KEY `worktype` (`worktype`),
   KEY `doctor` (`doctor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 DROP TABLE IF EXISTS `worktypes`;
-CREATE TABLE IF NOT EXISTS `worktypes` (
+CREATE TABLE `worktypes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8_polish_ci NOT NULL,
   `price` decimal(8,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci AUTO_INCREMENT=66 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 DROP TABLE IF EXISTS `worktype_prices`;
-CREATE TABLE IF NOT EXISTS `worktype_prices` (
+CREATE TABLE `worktype_prices` (
   `doctor` int(10) unsigned NOT NULL,
   `worktype` int(10) unsigned NOT NULL,
   `price` decimal(8,2) unsigned NOT NULL DEFAULT '0.00',
@@ -80,6 +99,14 @@ CREATE TABLE IF NOT EXISTS `worktype_prices` (
   KEY `worktype` (`worktype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
+
+ALTER TABLE `invoices`
+  ADD CONSTRAINT `invoices_ibfk_1` FOREIGN KEY (`seller`) REFERENCES `contacts` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `invoices_ibfk_2` FOREIGN KEY (`buyer`) REFERENCES `contacts` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `invoice_tasks`
+  ADD CONSTRAINT `invoice_tasks_ibfk_1` FOREIGN KEY (`invoice`) REFERENCES `invoices` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `invoice_tasks_ibfk_2` FOREIGN KEY (`task`) REFERENCES `tasks` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `tasks`
   ADD CONSTRAINT `tasks_ibfk_3` FOREIGN KEY (`patient`) REFERENCES `contacts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -90,7 +117,3 @@ ALTER TABLE `tasks`
 ALTER TABLE `worktype_prices`
   ADD CONSTRAINT `worktype_prices_ibfk_1` FOREIGN KEY (`doctor`) REFERENCES `contacts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `worktype_prices_ibfk_2` FOREIGN KEY (`worktype`) REFERENCES `contacts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

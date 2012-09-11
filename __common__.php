@@ -363,9 +363,9 @@ function escape_vars(&$string1, &$string2 = null, &$string3 = null, &$string4 = 
 
 function escape_array(array &$data)
 {
-  foreach ($data as &$value)
+  foreach ($data as $key => $value)
   {
-    $value = escape($value);
+    $data[$key] = escape($value);
   }
 
   return $data;
@@ -377,6 +377,8 @@ function escape_object($object)
   {
     $object->{$key} = escape($value);
   }
+
+  return $object;
 }
 
 function fff($alt, $src, $href = null, $id = null, $class = null)

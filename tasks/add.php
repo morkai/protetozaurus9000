@@ -40,11 +40,11 @@ $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY 
 
 <div class="page-header">
   <h1>
-    <a href="<?= url_for("/tasks") ?>">Zadania</a> \
+    <a href="<?= url_for("tasks") ?>">Zadania</a> \
     Dodawanie
   </h1>
 </div>
 
-<form action="<?= url_for("/tasks/add.php") ?>" method=post autocomplete=off>
+<form action="<?= url_for("tasks/add.php") ?>" method=post autocomplete=off>
   <? include __DIR__ . '/__form__.php' ?>
 </form>

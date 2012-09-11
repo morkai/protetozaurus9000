@@ -64,6 +64,7 @@
 </div>
 
 <? begin_slot('js') ?>
+<script src="<?= url_for("__assets__/js/typeaheadContacts.js") ?>"></script>
 <script>
 $(function()
 {
@@ -74,48 +75,10 @@ $(function()
   $('#task-worktype').chosen(chosenOptions);
   $('#task-color').chosen(chosenOptions);
 
-  var typeaheadOptions = {
-    ajax: {
-      method: 'get',
-      url: '<?= url_for("/contacts/index.php?perPage=15") ?>'
-    },
-    matcher: function() { return true; },
-    sorter: function(items) { return items; },
-    updater: function(i)
-    {
-      var contact = this.ajax.data[i] || {
-        id: 0,
-        name: ''
-      };
+  $('#task-doctorName').typeaheadContacts();
+  $('#task-patientName').typeaheadContacts();
 
-      this.$element.next().val(contact.id).change();
-
-      return contact.name;
-    },
-    itemRenderer: function(i, contact)
-    {
-      var html = '<em>' + contact.name + '</em>';
-
-      if (contact.company !== '')
-      {
-        html += '<br>' + contact.company;
-      }
-
-      i = $(this.options.item).attr('data-value', i);
-      i.find('a').html(html);
-
-      return i[0]
-    }
-  };
-
-  var $doctor = $('#task-doctorName').typeahead(typeaheadOptions);
-  var $patient = $('#task-patientName').typeahead(typeaheadOptions);
-
-  $(window).resize(function()
-  {
-    $doctor.data('typeahead').$menu.css('min-width', $doctor.outerWidth());
-    $patient.data('typeahead').$menu.css('min-width', $patient.outerWidth());
-  }).resize();
+  $(window).resize();
 
   var priceRefresher = null;
   var $price = $('#task-price');

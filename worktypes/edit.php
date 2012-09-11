@@ -80,16 +80,16 @@ VIEW:
 
 <div class="page-header">
   <h1>
-    <a href="<?= url_for("/worktypes/?doctor={$doctorId}") ?>">Typy prac</a>
+    <a href="<?= url_for("worktypes/?doctor={$doctorId}") ?>">Typy prac</a>
     <? if (!empty($doctor)): ?>
-    dla <a href="<?= url_for("/contacts/view.php?id={$doctorId}") ?>"><?= e($doctor->name) ?></a>
+    dla <a href="<?= url_for("contacts/view.php?id={$doctorId}") ?>"><?= e($doctor->name) ?></a>
     <? endif ?>
     \
-    <a href="<?= url_for("/worktypes/view.php?id={$worktype->id}&doctor={$doctorId}") ?>"><?= $worktype->name ?></a> \
+    <a href="<?= url_for("worktypes/view.php?id={$worktype->id}&doctor={$doctorId}") ?>"><?= $worktype->name ?></a> \
     Edycja
   </h1>
 </div>
 
-<form action="<?= url_for("/worktypes/edit.php?id={$worktype->id}&doctor={$doctorId}") ?>" method=post>
+<form action="<?= url_for("worktypes/edit.php?id={$worktype->id}&doctor={$doctorId}") ?>" method=post>
   <? include __DIR__ . '/__form__.php' ?>
 </form>

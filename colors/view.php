@@ -16,11 +16,11 @@ escape($color);
 
 <div class="page-header">
   <ul class="page-actions">
-    <li><a class="btn" href="<?= url_for("/colors/edit.php?id={$color->id}") ?>"><i class="icon-pencil"></i> Edytuj</a>
-    <li><a class="btn btn-danger" href="<?= url_for("/colors/delete.php?id={$color->id}") ?>"><i class="icon-remove icon-white"></i> Usuń</a>
+    <li><a class="btn" href="<?= url_for("colors/edit.php?id={$color->id}") ?>"><i class="icon-pencil"></i> Edytuj</a>
+    <li><a class="btn btn-danger" href="<?= url_for("colors/delete.php?id={$color->id}") ?>"><i class="icon-remove icon-white"></i> Usuń</a>
   </ul>
   <h1>
-    <a href="<?= url_for("/colors") ?>">Kolory</a> \
+    <a href="<?= url_for("colors") ?>">Kolory</a> \
     <?= $color->name ?>
   </h1>
 </div>

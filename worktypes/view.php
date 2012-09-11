@@ -39,13 +39,13 @@ not_found_if(empty($worktype));
 
 <div class="page-header">
   <ul class="page-actions">
-    <li><a class="btn" href="<?= url_for("/worktypes/edit.php?id={$worktype->id}&doctor={$doctorId}") ?>"><i class="icon-pencil"></i> Edytuj</a>
-    <li><a class="btn btn-danger" href="<?= url_for("/worktypes/delete.php?id={$worktype->id}") ?>"><i class="icon-remove icon-white"></i> Usuń</a>
+    <li><a class="btn" href="<?= url_for("worktypes/edit.php?id={$worktype->id}&doctor={$doctorId}") ?>"><i class="icon-pencil"></i> Edytuj</a>
+    <li><a class="btn btn-danger" href="<?= url_for("worktypes/delete.php?id={$worktype->id}") ?>"><i class="icon-remove icon-white"></i> Usuń</a>
   </ul>
   <h1>
-    <a href="<?= url_for("/worktypes/?doctor={$doctorId}") ?>">Typy prac</a>
+    <a href="<?= url_for("worktypes/?doctor={$doctorId}") ?>">Typy prac</a>
     <? if (!empty($doctor)): ?>
-    dla <a href="<?= url_for("/contacts/view.php?id={$doctorId}") ?>"><?= e($doctor->name) ?></a>
+    dla <a href="<?= url_for("contacts/view.php?id={$doctorId}") ?>"><?= e($doctor->name) ?></a>
     <? endif ?>
     \
     <?= e($worktype->name) ?>

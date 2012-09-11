@@ -26,12 +26,12 @@ escape($contact);
 
 <div class="page-header">
   <h1>
-    <a href="<?= url_for("/contacts") ?>">Kontakty</a> \
-    <a href="<?= url_for("/contacts/view.php?id={$contact->id}") ?>"><?= $contact->name ?></a> \
+    <a href="<?= url_for("contacts") ?>">Kontakty</a> \
+    <a href="<?= url_for("contacts/view.php?id={$contact->id}") ?>"><?= $contact->name ?></a> \
     Edycja
   </h1>
 </div>
 
-<form action="<?= url_for("/contacts/edit.php?id={$contact->id}") ?>" method=post>
+<form action="<?= url_for("contacts/edit.php?id={$contact->id}") ?>" method=post>
   <? include __DIR__ . '/__form__.php' ?>
 </form>

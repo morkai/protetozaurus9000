@@ -2,6 +2,7 @@
 
 $menu = array(
   'tasks' => 'Zadania',
+  'invoices' => 'Faktury',
   'contacts' => 'Kontakty',
   'worktypes' => 'Typy prac',
   'colors' => 'Kolory'

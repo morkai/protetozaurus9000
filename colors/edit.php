@@ -26,12 +26,12 @@ escape($color);
 
 <div class="page-header">
   <h1>
-    <a href="<?= url_for("/colors") ?>">Kolory</a> \
-    <a href="<?= url_for("/colors/view.php?id={$color->id}") ?>"><?= $color->name ?></a> \
+    <a href="<?= url_for("colors") ?>">Kolory</a> \
+    <a href="<?= url_for("colors/view.php?id={$color->id}") ?>"><?= $color->name ?></a> \
     Edycja
   </h1>
 </div>
 
-<form action="<?= url_for("/colors/edit.php?id={$color->id}") ?>" method=post>
+<form action="<?= url_for("colors/edit.php?id={$color->id}") ?>" method=post>
   <? include __DIR__ . '/__form__.php' ?>
 </form>

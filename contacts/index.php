@@ -57,7 +57,7 @@ $pagedContacts->fill($totalItems, $contacts);
 <div class="page-header">
   <ul class="page-actions">
     <li>
-      <form class="form-search" action="<?= url_for("/contacts") ?>">
+      <form class="form-search" action="<?= url_for("contacts") ?>">
         <div class="input-append">
           <input class="span3" name="query" type="search" value="<?= $query ?>" results=5 autofocus><input class="btn" type="submit" value="Szukaj">
         </div>

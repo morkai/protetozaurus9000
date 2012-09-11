@@ -76,7 +76,13 @@ if (!empty($conditions))
   $where = 'WHERE ' . implode(' AND ', $conditions);
 }
 
-$q = <<<SQL
+if (is_ajax() && !empty($_GET['query']))
+{
+  $where = "WHERE t.nr LIKE '%" . addslashes((string)$_GET['query']) . "%' AND t.id NOT IN(SELECT it.task FROM invoice_tasks it)";
+}
+else
+{
+  $q = <<<SQL
 SELECT COUNT(*) AS total
 FROM tasks t
 LEFT JOIN contacts d ON d.id=t.doctor
@@ -85,7 +91,8 @@ INNER JOIN worktypes w ON w.id=t.worktype
 {$where}
 SQL;
 
-$totalItems = fetch_one($q)->total;
+  $totalItems = fetch_one($q)->total;
+}
 
 $q = <<<SQL
 SELECT
@@ -103,6 +110,11 @@ LIMIT {$pagedTasks->getOffset()}, {$perPage}
 SQL;
 
 $tasks = fetch_all($q);
+
+if (is_ajax())
+{
+  output_json($tasks);
+}
 
 $pagedTasks->fill($totalItems, $tasks);
 
@@ -122,7 +134,7 @@ $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY 
   <h1>Zadania</h1>
 </div>
 
-<form id="tasksFilter" class="well form-inline" action="<?= url_for("/tasks/") ?>">
+<form id="tasksFilter" class="well form-inline" action="<?= url_for("tasks/") ?>">
   <input type="hidden" name="perPage" value="<?= $perPage ?>">
   <div class="row">
     <div class="control-group span2">
@@ -154,7 +166,7 @@ $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY 
     </div>
   </div>
   <input class="btn btn-primary" type="submit" value="Filtruj zadania">
-  <a class="btn" href="<?= url_for("/tasks") ?>">Wyczyść filtry</a>
+  <a class="btn" href="<?= url_for("tasks") ?>">Wyczyść filtry</a>
 </form>
 
 <table class="table table-bordered table-condensed">
@@ -190,8 +202,10 @@ $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY 
       <td><?= e($task->worktypeName) ?>
       <td class="actions">
         <a class="btn" href="<?= url_for("tasks/view.php?id={$task->id}") ?>"><i class="icon-list-alt"></i></a>
+        <? if (!$task->closed): ?>
         <a class="btn" href="<?= url_for("tasks/edit.php?id={$task->id}") ?>"><i class="icon-pencil"></i></a>
         <a class="btn btn-danger" href="<?= url_for("tasks/delete.php?id={$task->id}") ?>"><i class="icon-remove icon-white"></i></a>
+        <? endif ?>
     </tr>
     <? endforeach ?>
   </tbody>

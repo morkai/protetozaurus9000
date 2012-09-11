@@ -127,6 +127,19 @@ br + label {
 .properties .teeth {
   width: 352px;
 }
+.form-errors {
+  margin-left: 0;
+  list-style: none;
+  line-height: 1;
+}
+.form-error {
+  margin-top: .25em;
+  padding-left: .5em;
+  border-left: 1em solid #D98078;
+}
+.form-error:first-child {
+  margin-top: 0;
+}
 @media (max-width: 979px) {
   body {
     padding-top: 0;

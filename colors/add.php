@@ -24,11 +24,11 @@ $color = (object)array(
 
 <div class="page-header">
   <h1>
-    <a href="<?= url_for("/colors") ?>">Kolory</a> \
+    <a href="<?= url_for("colors") ?>">Kolory</a> \
     Dodawanie
   </h1>
 </div>
 
-<form action="<?= url_for("/colors/add.php") ?>" method=post>
+<form action="<?= url_for("colors/add.php") ?>" method=post>
   <? include __DIR__ . '/__form__.php' ?>
 </form>

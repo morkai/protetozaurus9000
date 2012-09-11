@@ -20,6 +20,8 @@ $task = fetch_one($q, array(':id' => $_GET['id']));
 
 not_found_if(empty($task));
 
+bad_request_if($task->closed);
+
 if (!empty($_POST['task']))
 {
   $data = tasks_prepare_data($_POST['task']);
@@ -45,12 +47,12 @@ $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY 
 
 <div class="page-header">
   <h1>
-    <a href="<?= url_for("/tasks") ?>">Zadania</a> \
-    <a href="<?= url_for("/tasks/view.php?id={$task->id}") ?>"><?= $task->nr ?></a> \
+    <a href="<?= url_for("tasks") ?>">Zadania</a> \
+    <a href="<?= url_for("tasks/view.php?id={$task->id}") ?>"><?= $task->nr ?></a> \
     Edycja
   </h1>
 </div>
 
-<form action="<?= url_for("/tasks/edit.php?id={$task->id}") ?>" method=post autocomplete=off>
+<form action="<?= url_for("tasks/edit.php?id={$task->id}") ?>" method=post autocomplete=off>
   <? include __DIR__ . '/__form__.php' ?>
 </form>
