@@ -66,10 +66,10 @@ if (!empty($_POST['worktype']))
 
       goto VIEW;
     }
-
-    set_flash('Typ prac został zmodyfikowany pomyślnie!');
-    go_to(get_referer("/worktypes/view.php?id={$worktype->id}&doctor={$doctorId}"));
   }
+
+  set_flash('Typ prac został zmodyfikowany pomyślnie!');
+  go_to(get_referer("/worktypes/view.php?id={$worktype->id}&doctor={$doctorId}"));
 }
 
 VIEW:
