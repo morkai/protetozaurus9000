@@ -112,6 +112,7 @@ $pagedInvoices->fill($totalItems, $invoices);
         <? else: ?>
         <a class="btn" href="<?= url_for("invoices/close.php?id={$invoice->id}") ?>"><i class="icon-lock"></i></a>
         <a class="btn" href="<?= url_for("invoices/edit.php?id={$invoice->id}") ?>"><i class="icon-pencil"></i></a>
+        <a class="btn" href="<?= url_for("invoices/tasks.php?invoice={$invoice->id}") ?>"><i class="icon-random"></i></a>
         <a class="btn btn-danger" href="<?= url_for("invoices/delete.php?id={$invoice->id}") ?>"><i class="icon-remove icon-white"></i></a>
         <? endif ?>
     </tr>

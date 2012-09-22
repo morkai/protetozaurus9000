@@ -168,6 +168,13 @@ function go_to($location)
   exit;
 }
 
+function internal_server_error()
+{
+  header('HTTP/1.1 500 Internal Server Error');
+
+  exit;
+}
+
 function bad_request()
 {
   header('HTTP/1.1 400 Bad Request');

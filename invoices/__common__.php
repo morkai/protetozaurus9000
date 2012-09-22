@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . '/../__common__.php';
+include_once __DIR__ . '/../__common__.php';
 
 function invoices_render_contact_id($company, $name)
 {

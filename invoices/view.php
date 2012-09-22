@@ -41,7 +41,8 @@ escape($invoice);
     <li><a class="btn" href="<?= url_for("invoices/print.php?id={$invoice->id}") ?>"><i class="icon-print"></i> Drukuj</a>
     <? else: ?>
     <li><a class="btn" href="<?= url_for("invoices/close.php?id={$invoice->id}") ?>"><i class="icon-lock"></i> Zamknij i drukuj</a>
-    <li><a class="btn" href="<?= url_for("invoices/edit.php?id={$invoice->id}") ?>"><i class="icon-pencil"></i> Edytuj</a>
+      <li><a class="btn" href="<?= url_for("invoices/edit.php?id={$invoice->id}") ?>"><i class="icon-pencil"></i> Edytuj</a>
+      <li><a class="btn" href="<?= url_for("invoices/tasks.php?invoice={$invoice->id}") ?>"><i class="icon-random"></i> Przypisz zadania</a>
     <li><a class="btn btn-danger" href="<?= url_for("invoices/delete.php?id={$invoice->id}") ?>"><i class="icon-remove icon-white"></i> Usuń</a>
     <? endif ?>
   </ul>
@@ -90,7 +91,11 @@ escape($invoice);
           <td><?= e($task->worktypeName) ?>
           <td><?= $task->quantity ?> <?= e($task->unit) ?>
           <td><?= $task->price ?> zł
-          <td><a class="btn" href="<?= url_for("tasks/view.php?id={$task->id}") ?>"><i class="icon-list-alt"></i></a>
+          <td class="actions">
+            <a class="btn" href="<?= url_for("tasks/view.php?id={$task->id}") ?>"><i class="icon-list-alt"></i></a>
+            <? if (!$invoice->closed): ?>
+            <a class="btn btn-danger" href="<?= url_for("invoices/deassign.php?task={$task->id}&invoice={$invoice->id}") ?>"><i class="icon-minus icon-white"></i></a>
+            <? endif ?>
         </tr>
         <? endforeach ?>
         <? endif ?>
