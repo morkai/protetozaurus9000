@@ -40,9 +40,9 @@ $pagedColors->fill($totalItems, $colors);
     <tr>
       <td><?= e($color->name) ?>
       <td class="actions">
-        <a class="btn" href="<?= url_for("colors/view.php?id={$color->id}") ?>"><i class="icon-list-alt"></i></a>
-        <a class="btn" href="<?= url_for("colors/edit.php?id={$color->id}") ?>"><i class="icon-pencil"></i></a>
-        <a class="btn btn-danger" href="<?= url_for("colors/delete.php?id={$color->id}") ?>"><i class="icon-remove icon-white"></i></a>
+        <a class="btn" title="Wyświetl szczegóły koloru" href="<?= url_for("colors/view.php?id={$color->id}") ?>"><i class="icon-list-alt"></i></a>
+        <a class="btn" tilte="Edytuj kolor" href="<?= url_for("colors/edit.php?id={$color->id}") ?>"><i class="icon-pencil"></i></a>
+        <a class="btn btn-danger" title="Usuń kolor" href="<?= url_for("colors/delete.php?id={$color->id}") ?>"><i class="icon-remove icon-white"></i></a>
     </tr>
     <? endforeach ?>
   </tbody>

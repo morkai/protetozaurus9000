@@ -142,7 +142,7 @@ escape($invoice);
           <td>{$price} zł
           <td>
             <input type="hidden" name="invoice[tasks][]" value="{$id}">
-            <span class="btn remove-task"><i class="icon-remove"></i></span>
+            <span class="btn remove-task" title="Usuń przypisanie"><i class="icon-remove"></i></span>
         </tr>
         <? foreach ($invoice->tasks as $task): ?>
         <tr class="task" data-id="<?= $task->id ?>">
@@ -153,7 +153,7 @@ escape($invoice);
           <td><?= $task->price ?> zł
           <td>
             <input type="hidden" name="invoice[tasks][]" value="<?= $task->id ?>">
-            <span class="btn remove-task"><i class="icon-remove"></i></span>
+            <span class="btn remove-task" title="Usuń przypisanie"><i class="icon-remove"></i></span>
         </tr>
         <? endforeach ?>
       </tbody>

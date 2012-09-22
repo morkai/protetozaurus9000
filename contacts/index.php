@@ -92,9 +92,9 @@ $pagedContacts->fill($totalItems, $contacts);
         <? endif ?>
       <td><?= $contact->address ?>
       <td class="actions">
-        <a class="btn" href="<?= url_for("contacts/view.php?id={$contact->id}") ?>"><i class="icon-list-alt"></i></a>
-        <a class="btn" href="<?= url_for("contacts/edit.php?id={$contact->id}") ?>"><i class="icon-pencil"></i></a>
-        <a class="btn btn-danger" href="<?= url_for("contacts/delete.php?id={$contact->id}") ?>"><i class="icon-remove icon-white"></i></a>
+        <a class="btn" title="Wyświetl szczegóły kontaktu" href="<?= url_for("contacts/view.php?id={$contact->id}") ?>"><i class="icon-list-alt"></i></a>
+        <a class="btn" title="Edytuj kontakt" href="<?= url_for("contacts/edit.php?id={$contact->id}") ?>"><i class="icon-pencil"></i></a>
+        <a class="btn btn-danger" title="Usuń kontakt" href="<?= url_for("contacts/delete.php?id={$contact->id}") ?>"><i class="icon-remove icon-white"></i></a>
     </tr>
     <? endforeach ?>
   </tbody>

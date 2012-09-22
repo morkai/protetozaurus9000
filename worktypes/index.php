@@ -68,9 +68,9 @@ $disabledClass = empty($doctor) ? '' : 'disabled';
       <td><?= e($worktype->name) ?>
       <td><?= $worktype->price ?> zł
       <td class="actions">
-        <a class="btn" href="<?= url_for("worktypes/view.php?id={$worktype->id}&doctor={$doctorId}") ?>"><i class="icon-list-alt"></i></a>
-        <a class="btn" href="<?= url_for("worktypes/edit.php?id={$worktype->id}&doctor={$doctorId}") ?>"><i class="icon-pencil"></i></a>
-        <a class="btn btn-danger <?= $disabledClass ?>" href="<?= url_for("worktypes/delete.php?id={$worktype->id}") ?>"><i class="icon-remove icon-white"></i></a>
+        <a class="btn" title="Wyświetl szczegóły typu pracy" href="<?= url_for("worktypes/view.php?id={$worktype->id}&doctor={$doctorId}") ?>"><i class="icon-list-alt"></i></a>
+        <a class="btn" title="Edytuj typ pracy" href="<?= url_for("worktypes/edit.php?id={$worktype->id}&doctor={$doctorId}") ?>"><i class="icon-pencil"></i></a>
+        <a class="btn btn-danger <?= $disabledClass ?>" title="Usuń typ pracy" href="<?= url_for("worktypes/delete.php?id={$worktype->id}") ?>"><i class="icon-remove icon-white"></i></a>
     </tr>
     <? endforeach ?>
   </tbody>

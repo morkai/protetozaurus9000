@@ -201,10 +201,10 @@ $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY 
         <? endif ?>
       <td><?= e($task->worktypeName) ?>
       <td class="actions">
-        <a class="btn" href="<?= url_for("tasks/view.php?id={$task->id}") ?>"><i class="icon-list-alt"></i></a>
+        <a class="btn" title="Wyświetl szczegóły zadania" href="<?= url_for("tasks/view.php?id={$task->id}") ?>"><i class="icon-list-alt"></i></a>
         <? if (!$task->closed): ?>
-        <a class="btn" href="<?= url_for("tasks/edit.php?id={$task->id}") ?>"><i class="icon-pencil"></i></a>
-        <a class="btn btn-danger" href="<?= url_for("tasks/delete.php?id={$task->id}") ?>"><i class="icon-remove icon-white"></i></a>
+        <a class="btn" title="Edytuj zadanie" href="<?= url_for("tasks/edit.php?id={$task->id}") ?>"><i class="icon-pencil"></i></a>
+        <a class="btn btn-danger" title="Usuń zadanie" href="<?= url_for("tasks/delete.php?id={$task->id}") ?>"><i class="icon-remove icon-white"></i></a>
         <? endif ?>
     </tr>
     <? endforeach ?>

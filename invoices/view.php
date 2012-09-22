@@ -92,9 +92,9 @@ escape($invoice);
           <td><?= $task->quantity ?> <?= e($task->unit) ?>
           <td><?= $task->price ?> zł
           <td class="actions">
-            <a class="btn" href="<?= url_for("tasks/view.php?id={$task->id}") ?>"><i class="icon-list-alt"></i></a>
+            <a class="btn" title="Wyświetl szczegóły zadania" href="<?= url_for("tasks/view.php?id={$task->id}") ?>"><i class="icon-list-alt"></i></a>
             <? if (!$invoice->closed): ?>
-            <a class="btn btn-danger" href="<?= url_for("invoices/deassign.php?task={$task->id}&invoice={$invoice->id}") ?>"><i class="icon-minus icon-white"></i></a>
+            <a class="btn btn-danger" title="Usuń przypisanie zadania do faktury" href="<?= url_for("invoices/deassign.php?task={$task->id}&invoice={$invoice->id}") ?>"><i class="icon-minus icon-white"></i></a>
             <? endif ?>
         </tr>
         <? endforeach ?>

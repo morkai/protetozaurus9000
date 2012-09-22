@@ -106,14 +106,14 @@ $pagedInvoices->fill($totalItems, $invoices);
       <td><?= date('Y-m-d', $invoice->date) ?>
       <td><a href="<?= url_for("contacts/view.php?id={$invoice->buyer}") ?>"><?= invoices_render_contact_id($invoice->buyerCompany, $invoice->buyerName) ?></a>
       <td class="actions">
-        <a class="btn" href="<?= url_for("invoices/view.php?id={$invoice->id}") ?>"><i class="icon-list-alt"></i></a>
+        <a class="btn" title="Wyświetl szczegóły faktury" href="<?= url_for("invoices/view.php?id={$invoice->id}") ?>"><i class="icon-list-alt"></i></a>
         <? if ($invoice->closed): ?>
-        <a class="btn" href="<?= url_for("invoices/print.php?id={$invoice->id}") ?>"><i class="icon-print"></i></a>
+        <a class="btn" title="Drukuj fakturę" href="<?= url_for("invoices/print.php?id={$invoice->id}") ?>"><i class="icon-print"></i></a>
         <? else: ?>
-        <a class="btn" href="<?= url_for("invoices/close.php?id={$invoice->id}") ?>"><i class="icon-lock"></i></a>
-        <a class="btn" href="<?= url_for("invoices/edit.php?id={$invoice->id}") ?>"><i class="icon-pencil"></i></a>
-        <a class="btn" href="<?= url_for("invoices/tasks.php?invoice={$invoice->id}") ?>"><i class="icon-random"></i></a>
-        <a class="btn btn-danger" href="<?= url_for("invoices/delete.php?id={$invoice->id}") ?>"><i class="icon-remove icon-white"></i></a>
+        <a class="btn" title="Zamknij i drukuj fakturę" href="<?= url_for("invoices/close.php?id={$invoice->id}") ?>"><i class="icon-lock"></i></a>
+        <a class="btn" title="Edytuj fakturę" href="<?= url_for("invoices/edit.php?id={$invoice->id}") ?>"><i class="icon-pencil"></i></a>
+        <a class="btn" title="Przypisz zadania do faktury" href="<?= url_for("invoices/tasks.php?invoice={$invoice->id}") ?>"><i class="icon-random"></i></a>
+        <a class="btn btn-danger" title="Usuń fakturę" href="<?= url_for("invoices/delete.php?id={$invoice->id}") ?>"><i class="icon-remove icon-white"></i></a>
         <? endif ?>
     </tr>
     <? endforeach ?>
