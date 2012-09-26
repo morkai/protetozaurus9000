@@ -34,9 +34,16 @@
     }
   };
 
-  $.fn.typeaheadContacts = function()
+  $.fn.typeaheadContacts = function(options)
   {
-    var typeaheadEl = this.typeahead(typeaheadOptions);
+    options = $.extend({}, typeaheadOptions, options);
+
+    if (options.url)
+    {
+      options.ajax.url = options.url;
+    }
+
+    var typeaheadEl = this.typeahead(options);
 
     $(window).resize(function()
     {

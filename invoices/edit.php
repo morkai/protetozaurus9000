@@ -176,7 +176,7 @@ $(function()
   var $newTaskNr = $('#newTaskNr').typeahead({
     ajax: {
       method: 'get',
-      url: '/tasks/index.php?perPage=15',
+      url: '<?= url_for('/tasks/index.php?perPage=15') ?>',
       triggerLength: 1,
       preProcess: function(data)
       {

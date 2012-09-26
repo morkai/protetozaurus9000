@@ -75,8 +75,12 @@ $(function()
   $('#task-worktype').chosen(chosenOptions);
   $('#task-color').chosen(chosenOptions);
 
-  $('#task-doctorName').typeaheadContacts();
-  $('#task-patientName').typeaheadContacts();
+  var typeaheadOptions = {
+    url: '<?= url_for('/contacts/index.php?perPage=15') ?>'
+  };
+
+  $('#task-doctorName').typeaheadContacts(typeaheadOptions);
+  $('#task-patientName').typeaheadContacts(typeaheadOptions);
 
   $(window).resize();
 
@@ -103,7 +107,7 @@ $(function()
 
     priceRefresher = $.ajax({
       type: 'GET',
-      url: '/worktypes/price.php',
+      url: '<?= url_for('/worktypes/price.php') ?>',
       data: {doctor: doctor, worktype: worktype},
       success: function(data)
       {
