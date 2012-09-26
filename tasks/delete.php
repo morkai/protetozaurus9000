@@ -6,7 +6,7 @@ bad_request_if(empty($_GET['id']));
 
 $task = fetch_one('SELECT id, closed FROM tasks WHERE id=? LIMIT 1', array(1 => $_GET['id']));
 
-not_found_if(empty($invoiceTask));
+not_found_if(empty($task));
 
 bad_request_if($task->closed);
 
