@@ -131,8 +131,12 @@ $invoice->buyerName = empty($_POST['buyerName']) ? '' : $_POST['buyerName'];
 <script>
 $(function()
 {
-  $('#invoice-buyerName').typeaheadContacts();
-  $('#invoice-sellerName').typeaheadContacts();
+  var typeaheadOptions = {
+    url: '<?= url_for('/contacts/index.php?perPage=15') ?>'
+  };
+
+  $('#invoice-buyerName').typeaheadContacts(typeaheadOptions);
+  $('#invoice-sellerName').typeaheadContacts(typeaheadOptions);
 
   $(window).resize();
 });
