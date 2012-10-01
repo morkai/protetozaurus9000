@@ -18,7 +18,6 @@ function tasks_prepare_data($data)
   }
 
   $data['doctor'] = empty($data['doctor']) ? null : (int)$data['doctor'];
-  $data['patient'] = empty($data['patient']) ? null : (int)$data['patient'];
   $data['teeth'] = empty($data['teeth']) ? '' : implode(',', $data['teeth']);
 
   return $data;

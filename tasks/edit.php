@@ -7,11 +7,9 @@ bad_request_if(empty($_GET['id']));
 $q = <<<SQL
 SELECT
   t.*,
-  d.name AS doctorName,
-  p.name AS patientName
+  d.name AS doctorName
 FROM tasks t
 LEFT JOIN contacts d ON d.id=t.doctor
-LEFT JOIN contacts p ON p.id=t.patient
 WHERE t.id=:id
 LIMIT 1
 SQL;

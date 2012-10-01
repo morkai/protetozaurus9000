@@ -17,11 +17,9 @@ not_found_if(empty($invoice));
 
 $q = <<<SQL
 SELECT t.*,
-p.name AS patientName,
 w.name AS worktypeName
 FROM invoice_tasks it
 INNER JOIN tasks t ON t.id=it.task
-INNER JOIN contacts p ON p.id=t.patient
 INNER JOIN worktypes w ON w.id=t.worktype
 WHERE it.invoice=:invoice
 ORDER BY t.id ASC
@@ -87,7 +85,7 @@ escape($invoice);
         <? foreach ($invoice->tasks as $task): ?>
         <tr class="task" data-id="<?= $task->id ?>">
           <td><?= e($task->nr) ?>
-          <td><a href="<?= url_for("contacts/view.php?id={$task->patient}") ?>"><?= e($task->patientName) ?></a>
+          <td><?= nl2br(e($task->patient)) ?>
           <td><?= e($task->worktypeName) ?>
           <td><?= $task->quantity ?> <?= e($task->unit) ?>
           <td><?= $task->price ?> zł

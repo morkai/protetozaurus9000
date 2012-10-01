@@ -64,7 +64,6 @@ escape($contact);
     <ul class="nav nav-list">
       <li class="nav-header">Listy zadań
       <li><a href="<?= url_for("tasks/?d={$contact->id}") ?>">Zadania jako lekarz</a>
-      <li><a href="<?= url_for("tasks/?p={$contact->id}") ?>">Zadania jako pacjent</a>
       <li class="nav-header">Inne
       <li><a href="<?= url_for("invoices/?buyer={$contact->id}") ?>">Faktury</a>
       <li><a href="<?= url_for("worktypes/?doctor={$contact->id}") ?>">Cennik prac</a>

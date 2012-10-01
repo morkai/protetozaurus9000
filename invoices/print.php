@@ -17,11 +17,9 @@ not_found_if(empty($invoice));
 
 $q = <<<SQL
 SELECT t.*,
-p.name AS patientName,
 w.name AS worktypeName
 FROM invoice_tasks it
 INNER JOIN tasks t ON t.id=it.task
-INNER JOIN contacts p ON p.id=t.patient
 INNER JOIN worktypes w ON w.id=t.worktype
 WHERE it.invoice=:invoice
 ORDER BY t.id ASC
@@ -163,7 +161,7 @@ $invoice->tasks = fetch_all($q, array(':invoice' => $invoice->id));
       <tr>
         <td><?= $i + 1 ?></td>
         <td><?= e($task->nr) ?></td>
-        <td><?= e($task->patientName) ?></td>
+        <td><?= nl2br(e($task->patient)) ?></td>
         <td><?= e($task->worktypeName) ?></td>
         <td><?= $task->quantity ?> <?= $task->unit ?></td>
         <td><?= $task->price ?> zł</td>

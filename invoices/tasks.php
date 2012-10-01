@@ -30,10 +30,8 @@ $totalItems = fetch_one($q, $bindings)->total;
 $q = <<<SQL
 SELECT
   t.*,
-  p.name AS patientName,
   w.name AS worktypeName
 FROM tasks t
-LEFT JOIN contacts p ON p.id=t.patient
 INNER JOIN worktypes w ON w.id=t.worktype
 WHERE t.closed=0 AND t.doctor=:buyer
 ORDER BY t.id DESC
@@ -77,7 +75,7 @@ $pagedTasks->fill($totalItems, $tasks);
         <? if (empty($task->patient)): ?>
         -
         <? else: ?>
-        <a href="<?= url_for("contacts/view.php?id={$task->patient}") ?>"><?= e($task->patientName) ?></a>
+        <?= nl2br(e($task->patient)) ?>
         <? endif ?>
       <td><?= e($task->worktypeName) ?>
       <td class="actions">

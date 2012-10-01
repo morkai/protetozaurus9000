@@ -18,9 +18,8 @@
   <input id=task-doctor name=task[doctor] type=hidden value="<?= $task->doctor ?>">
 </div>
 <div class="control-group">
-  <label for=task-patientName class="control-label">Pacjent:</label>
-  <input id=task-patientName class="span6" type=text value="<?= $task->patientName ?>">
-  <input id=task-patient name=task[patient] type=hidden value="<?= $task->patient ?>">
+  <label for=task-patient class="control-label">Pacjent:</label>
+  <textarea id=task-patient name=task[patient] class="span6" rows="4"><?= $task->patient ?></textarea>
 </div>
 <div class="row">
   <div class="span6">
@@ -75,12 +74,9 @@ $(function()
   $('#task-worktype').chosen(chosenOptions);
   $('#task-color').chosen(chosenOptions);
 
-  var typeaheadOptions = {
+  $('#task-doctorName').typeaheadContacts({
     url: '<?= url_for('/contacts/index.php?perPage=15') ?>'
-  };
-
-  $('#task-doctorName').typeaheadContacts(typeaheadOptions);
-  $('#task-patientName').typeaheadContacts(typeaheadOptions);
+  });
 
   $(window).resize();
 

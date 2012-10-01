@@ -25,11 +25,9 @@ bad_request_if($invoice->closed);
 
 $q = <<<SQL
 SELECT t.*,
-p.name AS patientName,
 w.name AS worktypeName
 FROM invoice_tasks it
 INNER JOIN tasks t ON t.id=it.task
-INNER JOIN contacts p ON p.id=t.patient
 INNER JOIN worktypes w ON w.id=t.worktype
 WHERE it.invoice=:invoice
 ORDER BY t.id ASC
@@ -136,7 +134,7 @@ escape($invoice);
       <tbody class="tasks">
         <tr id="task-template" class="task" data-id="{$id}">
           <td>{$nr}
-          <td><a href="<?= url_for('contacts/view.php?id={$patient}') ?>">{$patientName}</a>
+          <td>{$patient}
           <td>{$worktypeName}
           <td>{$quantity} {$unit}
           <td>{$price} zł
@@ -147,7 +145,7 @@ escape($invoice);
         <? foreach ($invoice->tasks as $task): ?>
         <tr class="task" data-id="<?= $task->id ?>">
           <td><?= e($task->nr) ?>
-          <td><a href="<?= url_for("contacts/view.php?id={$task->patient}") ?>"><?= e($task->patientName) ?></a>
+          <td><?= nl2br(e($task->patient)) ?>
           <td><?= e($task->worktypeName) ?>
           <td><?= $task->quantity ?> <?= e($task->unit) ?>
           <td><?= $task->price ?> zł
@@ -169,7 +167,7 @@ escape($invoice);
 $(function()
 {
   var taskTemplate = $('#task-template').detach().removeAttr('id')[0].outerHTML;
-  var templateVars = ['nr', 'patient', 'patientName', 'patient', 'worktypeName', 'quantity', 'unit', 'price', 'id'];
+  var templateVars = ['nr', 'patient', 'worktypeName', 'quantity', 'unit', 'price', 'id'];
 
   var $tasks = $('#tasksTable .tasks');
 
@@ -200,7 +198,14 @@ $(function()
 
       templateVars.forEach(function(templateVar)
       {
-        html = html.replace(new RegExp('\\{\\$' + templateVar + '\\}', 'g'), task[templateVar]);
+        var replacement = task[templateVar];
+
+        if (templateVar === 'patient')
+        {
+          replacement = replacement.replace(/\n/g, '<br>');
+        }
+
+        html = html.replace(new RegExp('\\{\\$' + templateVar + '\\}', 'g'), replacement);
       });
 
       $('#tasksTable .tasks').append(html);
@@ -211,7 +216,8 @@ $(function()
     },
     itemRenderer: function(i, task)
     {
-      var html = '<em>' + task.nr + '</em><br>' + task.patientName;
+      var patientName = task.patient.trim().split('\n')[0];
+      var html = '<em>' + task.nr + '</em><br>' + patientName;
 
       var el = $(this.options.item).attr('data-value', task.index);
       el.find('a').html(html);

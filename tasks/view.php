@@ -8,12 +8,10 @@ $q = <<<SQL
 SELECT
   t.*,
   d.name AS doctorName,
-  p.name AS patientName,
   c.name AS colorName,
   w.name AS worktypeName
 FROM tasks t
 LEFT JOIN contacts d ON d.id=t.doctor
-LEFT JOIN contacts p ON p.id=t.patient
 INNER JOIN colors c ON c.id=t.color
 INNER JOIN worktypes w ON w.id=t.worktype
 WHERE t.id=:id
@@ -79,7 +77,7 @@ $task->invoice = fetch_one($q, array(':task' => $task->id));
     <? if (empty($task->patient)): ?>
     -
     <? else: ?>
-    <a href="<?= url_for("contacts/view.php?id={$task->patient}") ?>"><?= e($task->patientName) ?></a>
+    <?= nl2br(e($task->patient)) ?>
     <? endif ?>
   <dt>Typ pracy:
   <dd><?= e($task->worktypeName) ?>

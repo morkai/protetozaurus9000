@@ -62,13 +62,9 @@ else if (strlen($filter['d']) >= 3)
   $conditions[] = "d.name LIKE '%" . addslashes($filter['d']) . "%'";
 }
 
-if (is_numeric($filter['p']))
+if (isset($filter['p']) && strlen($filter['p']) >= 3)
 {
-  $conditions[] = "t.patient={$filter['p']}";
-}
-else if (strlen($filter['p']) >= 3)
-{
-  $conditions[] = "p.name LIKE '%" . addslashes($filter['p']) . "%'";
+  $conditions[] = "t.patient LIKE '%" . addslashes($filter['p']) . "%'";
 }
 
 if (!empty($conditions))
@@ -86,7 +82,6 @@ else
 SELECT COUNT(*) AS total
 FROM tasks t
 LEFT JOIN contacts d ON d.id=t.doctor
-LEFT JOIN contacts p ON p.id=t.patient
 INNER JOIN worktypes w ON w.id=t.worktype
 {$where}
 SQL;
@@ -98,11 +93,9 @@ $q = <<<SQL
 SELECT
   t.*,
   d.name AS doctorName,
-  p.name AS patientName,
   w.name AS worktypeName
 FROM tasks t
 LEFT JOIN contacts d ON d.id=t.doctor
-LEFT JOIN contacts p ON p.id=t.patient
 INNER JOIN worktypes w ON w.id=t.worktype
 {$where}
 ORDER BY t.id DESC
@@ -119,7 +112,6 @@ if (is_ajax())
 $pagedTasks->fill($totalItems, $tasks);
 
 $worktypes = fetch_array('SELECT id AS `key`, name AS `value` FROM worktypes ORDER BY name ASC');
-$quantities = fetch_array('SELECT id AS `key`, name AS `value` FROM quantities ORDER BY name ASC');
 $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY name ASC');
 
 ?>
@@ -197,7 +189,7 @@ $colors = fetch_array('SELECT id AS `key`, name AS `value` FROM colors ORDER BY 
         <? if (empty($task->patient)): ?>
         -
         <? else: ?>
-        <a href="<?= url_for("contacts/view.php?id={$task->patient}") ?>"><?= e($task->patientName) ?></a>
+        <?= nl2br(e($task->patient)) ?>
         <? endif ?>
       <td><?= e($task->worktypeName) ?>
       <td class="actions">
