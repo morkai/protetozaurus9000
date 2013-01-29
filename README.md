@@ -8,4 +8,5 @@ PHP 5.3+ and MySQL 5+.
 
 ## License
 
-[New BSD License](http://opensource.org/licenses/BSD-3-Clause)
+This project is released under the
+[MIT License](https://raw.github.com/morkai/protetozaurus9000/master/license.md).
